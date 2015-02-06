@@ -4,32 +4,40 @@ class Image
 		@image=image
 	end
 
-
     def blur(n)
-    	@image.each_index do |x|
-    		@image[x].each_index do |y|
-                @copy=@image[0..-1]
-    		  	value = @image[x][y]
-    		  	a = n 
+        @copy = Array.new()
+        @image.each do |row|
+            @copy << (Array.new(row))
+        end
+        @image.each_index do |x|
+            @image[x].each_index do |y|
+                value = @image[x][y]
+                a = n 
                 b = n
-                
-                while a > -1 
-                    while b > -1    
-                        if value == 1 && a+b<=n 
-                            @copy[x+a][y+b] = 2
-                            @copy[x-a][y-b] = 2
-                            @copy[x-a][y+b] = 2
-                            @copy[x+a][y-b] = 2
-                        end        
-                        b=b-1
-                    end  
-                b=n     
-                a=a-1     
-                end 
+                if value ==1
+                    while a > -1 
+                        while b > -1    
+                            if a+b<=n && (x+a)<@image[y].length && (y+b)<@image[x].length
+                                @copy[x+a][y+b] = 1
+                            end
+                            if a+b<=n && (x-a)>=0 && (y-b)>=0
+                                @copy[x-a][y-b] = 1
+                            end
+                            if a+b<=n && (x-a)>=0 && (y+b)<@image[x].length
+                                @copy[x-a][y+b] = 1
+                            end
+                            if a+b<=n && (x+a)<@image[y].length && (y-b)>=0
+                                @copy[x+a][y-b] = 1
+                            end        
+                            b=b-1
+                        end  
+                        b=n     
+                        a=a-1     
+                    end 
+                end
             end
-        end	
-        puts @copy
-        #@image=@copy
+        end
+        @image = @copy
     end
 
     def output_image
