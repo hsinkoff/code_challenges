@@ -11,21 +11,14 @@ def floyd_cycle(loopnode)
 	hare=LinkedListNode.new(loopnode.value, loopnode.next_node)
 	tortoise=LinkedListNode.new(loopnode.value, loopnode.next_node)
 	begin	
-		if hare==nil
-			puts "false-no loop"
-			return
-		elsif tortoise==nil
-			puts "false-no loop"
-			return
-		elsif hare == tortoise
+		if hare == tortoise
 			puts "true-loop"
 			return
-		end
-		if tortoise.next_node != nil && tortoise.next_node.next_node != nil
+		elsif tortoise.next_node != nil && tortoise.next_node.next_node != nil
 			tortoise=tortoise.next_node.next_node
 			hare=hare.next_node
 		else
-			puts "No Loop"
+			puts "false-no loop"
 			return
 		end
 	end until hare ==nil || tortoise ==nil
