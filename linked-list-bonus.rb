@@ -8,8 +8,8 @@ class LinkedListNode
 end
 
 def floyd_cycle(loopnode)
-	hare=LinkedListNode.new(loopnode.value, loopnode.next_node)
-	tortoise=LinkedListNode.new(loopnode.value, loopnode.next_node)
+	hare=loopnode
+	tortoise=loopnode
 	begin	
 		if hare == tortoise
 			puts "true-loop"
